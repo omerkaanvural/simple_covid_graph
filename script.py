@@ -76,13 +76,14 @@ print(new_df.head())
 sns.set_theme(style="darkgrid",font='sans-serif')
 sns.set_context("notebook", font_scale=0.9)
 ax = sns.scatterplot(data=new_df,
-                x="total_deaths_per_million",
-                y="total_tests_per_thousand",
-                hue="continent",
-                size="total_vaccinations_per_hundred",
-                sizes=(40,200),
-                legend="brief")
+                     x="total_deaths_per_million",
+                     y="total_tests_per_thousand",
+                     hue="continent",
+                     size="total_vaccinations_per_hundred",
+                     sizes=(40,200),
+                     legend="brief")
 
+ax.set_xscale("log")
 # labelling scatterplot points by country names via label_point func
 def label_point(x, y, val, ax):
     a = pd.concat({'x': x, 'y': y, 'val': val}, axis=1)
@@ -92,5 +93,6 @@ def label_point(x, y, val, ax):
 # gca means get the current axes
 label_point(new_df["total_deaths_per_million"], new_df["total_tests_per_thousand"], new_df["location"], plt.gca())
 
+plt.savefig('png_graph.png', dpi=600)
 plt.show()
 
